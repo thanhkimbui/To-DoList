@@ -1,14 +1,24 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const port = 3000;
+var items = [];
 
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
   var today = new Date();
-  var currentDay = today.getDay();
+  var options = {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  };
+
+  var day = today.toLocaleDateString("en-US", options);
+  /*   var currentDay = today.getDay();
   var day = "";
 
   switch (currentDay) {
@@ -36,8 +46,15 @@ app.get("/", (req, res) => {
     default:
       console.log("Error: Current day is equal to: " + currentDay);
       break;
-  }
-  res.render("list", { kindOfDay: day });
+  } */
+  res.render("list", { kindOfDay: day, newListItems: items });
+});
+
+app.post("/", (postReq, postRes) => {
+  var item = postReq.body.newItem;
+  items.push(item);
+  postRes.redirect("/");
+  // postRes.render("list", { newListItem: item });
 });
 
 app.listen(port, () => {
