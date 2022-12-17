@@ -4,7 +4,8 @@
   "editor.formatOnType": true,
   "editor.defaultFormatter": null,
   "html.format.indentInnerHtml": true,
-  "editor.tabSize": 2,
+  "editor.tabSize": 4,
   "editor.wordWrapColumn": 80,
-  "html.format.indentHandlebars": true
+  "html.format.indentHandlebars": true,
+  "editor.fontSize": 13
 }
